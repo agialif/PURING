@@ -37,21 +37,21 @@ loginRouter.route('/')
             expiresIn: '24h'
         }
     );
-    // //cookies
+    //cookies
 
-    // res.cookie('authCookie', token,{maxAge:900000, htpOnly:true}).json({
-    //     error: null,
-    //     data: {
-    //         token,
-    //     }
-    // });
+    res.cookie('authCookie', token,{maxAge:900000, htpOnly:true}).json({
+        error: null,
+        data: {
+            token,
+        }
+    });
 
-    // res.header("auth-token", token).json({
-    //     error: null,
-    //     data: {
-    //         token,
-    //     },
-    // });
+    res.header("auth-token", token).json({
+        error: null,
+        data: {
+            token,
+        },
+    });
 });
 
 //register rout
