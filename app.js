@@ -3,11 +3,31 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var mongoose = require("mongoose");
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var {} = require('./routes/transactions');
 
 var app = express();
+
+var url = "mongodb+srv://puring:puring123@cluster0.i9i6o.mongodb.net/puring?authSource=admin&replicaSet=atlas-wqo433-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true"; // added
+var connect = mongoose.connect(url, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+  useFindAndModify: true,
+}); // added
+
+connect.then(
+  (db) => {
+    // added
+    console.log("Koneksi server MongoDB sukses");
+  },
+  (err) => {
+    console.log("Error koneksi: ", err);
+  }
+);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -21,6 +41,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.user('')
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
