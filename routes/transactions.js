@@ -23,11 +23,11 @@ pinjamRouter.route('/')
   })
   .post((req, res, next) => {
     Transactions.create(req.body)
-      .then((dish) => {
-        console.log('Pinjaman created', dish);
+      .then((results) => {
+        console.log('Pinjaman created', results);
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
-        res.json(dish);
+        res.json(results);
       });
   })
   .put((req, res, next) => {
@@ -40,12 +40,12 @@ pinjamRouter.route('/')
   .post((req, res, next) => {
     //TODO: tambahin 
     Transactions.create(req.body)
-      .then((dish) => {
-        console.log('Pinjaman created', dish);
+      .then((results) => {
+        console.log('Balikin ', results);
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
-        res.json(dish);
+        res.json(results);
       });
   });
 
-module.exports = dishRouter;
+  module.exports = {balikinRouter,pinjamRouter};

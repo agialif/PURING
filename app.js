@@ -15,6 +15,8 @@ var loginRouter = require('./routes/users/login');
 var verifyToken = require('./routes/validate-token');
 var adminRouter = require('./routes/admin/admin');
 
+var {balikinRouter, pinjamRouter} = require('./routes/transactions')
+
 var app = express();
 var url = 'mongodb+srv://puring:puring123@cluster0.i9i6o.mongodb.net/puring?retryWrites=true&w=majority'; //added
 var connect = mongoose.connect(url);
@@ -61,6 +63,10 @@ app.use('/users', userRouter);
 //user
 app.use('/signup', signupRouter);
 app.use('/login', loginRouter);
+
+//transactions
+// app.use('/pinjam',pinjamRouter);
+// app.use('/balikin',balikinRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
