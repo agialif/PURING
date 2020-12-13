@@ -3,13 +3,27 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var mongoose = require("mongoose");
+var mongoose = require('mongoose');
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var {} = require('./routes/transactions');
+var signupRouter = require('./routes/users/signup');
+var userRouter = require('./routes/admin/user-lists');
+var loginRouter = require('./routes/users/login');
+var verifyToken = require('./routes/validate-token');
+var adminRouter = require('./routes/admin/admin');
 
 var app = express();
+var url = 'mongodb+srv://puring:puring123@cluster0.i9i6o.mongodb.net/puring?retryWrites=true&w=majority'; //added
+var connect = mongoose.connect(url);
+
+connect.then((db)=>{ //added
+  console.log("Connection to MongoDB success");
+}, (err)=>{
+  console.log("Connection error: ", err);
+});
 
 var url = "mongodb+srv://puring:puring123@cluster0.i9i6o.mongodb.net/puring?authSource=admin&replicaSet=atlas-wqo433-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true"; // added
 var connect = mongoose.connect(url, {
@@ -40,8 +54,13 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.user('')
+//admin
+app.use('/admin', adminRouter);
+app.use('/users', userRouter);
+
+//user
+app.use('/signup', signupRouter);
+app.use('/login', loginRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
