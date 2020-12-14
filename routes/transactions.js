@@ -5,10 +5,10 @@ const mongoose = require('mongoose');
 const {Transactions} = require('../models/transactions');
 
 var pinjamRouter = express.Router();
-var balikinRouter = experss.Router();
+var balikinRouter = express.Router();
 
 pinjamRouter.use(bodyParser.json());
-balikinRouter.user(bodyParser.json());
+balikinRouter.use(bodyParser.json());
 
 
 pinjamRouter.route('/')

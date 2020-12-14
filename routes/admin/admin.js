@@ -12,7 +12,7 @@ adminRouter.use(bodyParser.json());
 
 adminRouter.route('/')
 .get((req, res, next) => {
-    Admin.find({})
+    Admin.find({}, {"_id": 0, "password": 0})
     .then((admin)=>{
         res.statusCode = 200;
         res.setHeader('Content-Type','application/json');
@@ -57,9 +57,9 @@ adminRouter.route('/')
     //     },
     // });
 })
-adminRouter.route('/edit/:username')
+adminRouter.route('/edit/:adminId')
 .put((req, res, next) => {
-    Admin.findByIdandUpdate(req.params.username,
+    Admin.findByIdandUpdate(req.params.adminId,
         {$set: req.body},
         {new: true})
     .then((admin)=>{ 

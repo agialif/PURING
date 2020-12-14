@@ -24,5 +24,5 @@ var transactionSchema = new Schema({
     }
 });
 
-var Transactions = mongoose.model('Dish', dishSchema);
+var Transactions = mongoose.model('Transactions', transactionSchema);
 module.exports = {Transactions};

@@ -29,13 +29,13 @@ connect.then((db)=>{ //added
   console.log("Connection error: ", err);
 });
 
-var url = "mongodb+srv://puring:puring123@cluster0.i9i6o.mongodb.net/puring?authSource=admin&replicaSet=atlas-wqo433-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true"; // added
-var connect = mongoose.connect(url, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true,
-  useFindAndModify: true,
-}); // added
+// var url = "mongodb+srv://puring:puring123@cluster0.i9i6o.mongodb.net/puring?authSource=admin&replicaSet=atlas-wqo433-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true"; // added
+// var connect = mongoose.connect(url, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+//   useCreateIndex: true,
+//   useFindAndModify: true,
+// }); // added
 
 connect.then(
   (db) => {
