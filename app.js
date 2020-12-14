@@ -12,7 +12,8 @@ var indexRouter = require('./routes/index');
 var signupRouter = require('./routes/users/signup');
 var userRouter = require('./routes/admin/user-lists');
 var loginRouter = require('./routes/users/login');
-var verifyToken = require('./routes/validate-token');
+//var verifyUser = require('./middleware/validateUser');
+var verifyAdmin = require('./middleware/validateAdmin');
 var adminRouter = require('./routes/admin/admin');
 
 var {balikinRouter, pinjamRouter} = require('./routes/transactions')
@@ -58,7 +59,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 //admin
 app.use('/admin', adminRouter);
-app.use('/users', userRouter);
+app.use('/users',verifyAdmin, userRouter);
 
 //user
 app.use('/signup', signupRouter);

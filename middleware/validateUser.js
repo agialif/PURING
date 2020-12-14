@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const verifyToken = (req, res, next) => {
+const verifyUser = (req, res, next) => {
 
     const token = req.cookies.authCookie;
 
@@ -9,7 +9,7 @@ const verifyToken = (req, res, next) => {
             return res.status(401).json('You need to login')
         }
 
-        const verified = jwt.verify(token, process.env.TOKEN_SECRET);
+        const verified = jwt.verify(token, process.env.TOKEN_SECRET_USER);
         req.user = verified;
         next();
     }
@@ -32,4 +32,4 @@ const verifyToken = (req, res, next) => {
     // }
 };
 
-module.exports = verifyToken;
+module.exports = verifyUser;
