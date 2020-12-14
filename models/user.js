@@ -14,8 +14,6 @@ var addressSchema = new Schema({
         type: String,
         required: true
     }
-}, {
-    timestamps: true
 });
 var userSchema = new Schema({
     name: {
@@ -44,7 +42,7 @@ var userSchema = new Schema({
         type: String,
         required: true
     },
-    address:[addressSchema]
+    address: addressSchema
 }, {
     timestamps: true
 });

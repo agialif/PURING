@@ -26,7 +26,6 @@ var verifyAdmin = require('./middleware/validateAdmin');
 //logout
 var logoutRouter = require('./routes/logout');
 
-var {balikinRouter, pinjamRouter} = require('./routes/transactions')
 
 var bookRouter = require('./routes/book/bookRoute');
 var bookAdminRouter = require('./routes/book/bookAdminRoute');
@@ -35,32 +34,21 @@ var categoryRouter = require('./routes/Category/category');
 var categoryAdminRouter = require('./routes/Category/categoryAdmin');
 
 var app = express();
-var url = 'mongodb+srv://puring:puring123@cluster0.i9i6o.mongodb.net/puring?retryWrites=true&w=majority'; //added
-var connect = mongoose.connect(url);
+
+
+var url = process.env.DB_URI;
+var connect = mongoose.connect(url, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+  useFindAndModify: true,
+}); // added
 
 connect.then((db)=>{ //added
   console.log("Connection to MongoDB success");
 }, (err)=>{
   console.log("Connection error: ", err);
 });
-
-// var url = "mongodb+srv://puring:puring123@cluster0.i9i6o.mongodb.net/puring?authSource=admin&replicaSet=atlas-wqo433-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true"; // added
-// var connect = mongoose.connect(url, {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-//   useCreateIndex: true,
-//   useFindAndModify: true,
-// }); // added
-
-connect.then(
-  (db) => {
-    // added
-    console.log("Koneksi server MongoDB sukses");
-  },
-  (err) => {
-    console.log("Error koneksi: ", err);
-  }
-);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
