@@ -26,6 +26,14 @@ profileRouter.route('/:userId')
     res.setHeader('Content-Type','application/json');
     res.json(user);
   })
+})
+.post((req, res, next) => {
+  res.status(403);
+  res.setHeader('Content-Type','application/json');
+})
+.delete((req, res, next) => {
+  res.status(403);
+  res.setHeader('Content-Type','application/json');
 });
 
 module.exports = profileRouter;

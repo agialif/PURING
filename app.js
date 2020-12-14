@@ -9,13 +9,22 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 var indexRouter = require('./routes/index');
+//USERS
 var signupRouter = require('./routes/users/signup');
-var userRouter = require('./routes/admin/user-lists');
 var loginRouter = require('./routes/users/login');
-var profileRouter = require('./routes/users/profile')
+var profileRouter = require('./routes/users/profile');
+
+//ADMIN
 var adminRouter = require('./routes/admin/admin');
+var userRouter = require('./routes/admin/user-lists');
+
+//MIDDLEWARE
+
 var verifyUser = require('./middleware/validateUser');
 var verifyAdmin = require('./middleware/validateAdmin');
+
+//logout
+var logoutRouter = require('./routes/logout');
 
 var {balikinRouter, pinjamRouter} = require('./routes/transactions')
 
@@ -59,13 +68,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 //admin
-app.use('/admin', adminRouter);
-app.use('/users',verifyAdmin, userRouter);
+app.use('/admin', adminRouter);//login as admin
+app.use('/users',verifyAdmin, userRouter);//view all users data
 
 //user
-app.use('/signup', signupRouter);
-app.use('/login', loginRouter);
-app.use('/profile',verifyUser, profileRouter)
+app.use('/signup', signupRouter);//user signup
+app.use('/login', loginRouter);//login as user
+app.use('/profile',verifyUser, profileRouter)//user profile
+
+//logout both admin and users
+app.use('/logout', logoutRouter);
 
 //transactions
 // app.use('/pinjam',pinjamRouter);

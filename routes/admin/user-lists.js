@@ -7,6 +7,7 @@ var userRouter = express.Router();
 
 userRouter.use(bodyParser.json());
 
+//GET all users data
 userRouter.route('/')
 .get((req, res, next)=>{
   User.find({})
