@@ -43,10 +43,10 @@ KatAdmRouter.route('/:judul')
         })
 });
 
-KatAdmRouter.route('/:judul')
+KatAdmRouter.route('/:nama')
     .delete((req, res, next) => {
-        var judul = req.params.judul;
-        Categories.findOneAndRemove(judul)
+        var nama = req.params.nama;
+        Categories.findOneAndDelete({nama:nama})
         .then((resp) => {
         console.log('Category removed', resp);
         res.statusCode = 200;
