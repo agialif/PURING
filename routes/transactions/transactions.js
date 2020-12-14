@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-const {Transactions} = require('../models/transactions');
+const {Transactions} = require('../../models/transactions');
 
 var pinjamRouter = express.Router();
 var balikinRouter = express.Router();
