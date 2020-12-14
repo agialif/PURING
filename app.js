@@ -12,9 +12,10 @@ var indexRouter = require('./routes/index');
 var signupRouter = require('./routes/users/signup');
 var userRouter = require('./routes/admin/user-lists');
 var loginRouter = require('./routes/users/login');
-//var verifyUser = require('./middleware/validateUser');
-var verifyAdmin = require('./middleware/validateAdmin');
+var profileRouter = require('./routes/users/profile')
 var adminRouter = require('./routes/admin/admin');
+var verifyUser = require('./middleware/validateUser');
+var verifyAdmin = require('./middleware/validateAdmin');
 
 var app = express();
 var url = 'mongodb+srv://puring:puring123@cluster0.i9i6o.mongodb.net/puring?retryWrites=true&w=majority'; //added
@@ -44,6 +45,7 @@ app.use('/users',verifyAdmin, userRouter);
 //user
 app.use('/signup', signupRouter);
 app.use('/login', loginRouter);
+app.use('/profile',verifyUser, profileRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

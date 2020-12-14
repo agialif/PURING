@@ -36,7 +36,7 @@ adminRouter.route('/')
             name: user.name,
             id: user._id
         },
-        process.env.TOKEN_SECRET,
+        process.env.TOKEN_SECRET_ADMIN,
         {
             expiresIn: '24h'
         }

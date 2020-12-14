@@ -32,7 +32,7 @@ loginRouter.route('/')
             name: user.name,
             id: user._id
         },
-        process.env.TOKEN_SECRET,
+        process.env.TOKEN_SECRET_USER,
         {
             expiresIn: '24h'
         }
@@ -46,12 +46,12 @@ loginRouter.route('/')
         }
     });
 
-    res.header("auth-token", token).json({
-        error: null,
-        data: {
-            token,
-        },
-    });
+    // res.header("auth-token", token).json({
+    //     error: null,
+    //     data: {
+    //         token,
+    //     },
+    // });
 });
 
 //register rout

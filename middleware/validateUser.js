@@ -14,7 +14,7 @@ const verifyUser = (req, res, next) => {
         next();
     }
     catch (err) {
-        return res.status(500).json(err.toString);
+        return res.status(500).json(err);
     }
     // const token = req.header('auth-token');
     // if(!token) {
