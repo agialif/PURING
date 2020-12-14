@@ -19,6 +19,9 @@ var adminRouter = require('./routes/admin/admin');
 var bookRouter = require('./routes/book/bookRoute');
 var bookAdminRouter = require('./routes/book/bookAdminRoute');
 
+var categoryRouter = require('./routes/Category/category');
+var categoryAdminRouter = require('./routes/Category/categoryAdmin');
+
 var app = express();
 var url = 'mongodb+srv://puring:puring123@cluster0.i9i6o.mongodb.net/puring?retryWrites=true&w=majority'; //added
 var connect = mongoose.connect(url);
@@ -48,8 +51,13 @@ app.use('/users',verifyAdmin, userRouter);
 app.use('/signup', signupRouter);
 app.use('/login', loginRouter);
 
+//book
 app.use('/buku', bookRouter);
-app.use('/admin/buku', verifyAdmin, bookAdminRouter)
+app.use('/admin/buku', verifyAdmin, bookAdminRouter);
+
+//category
+app.use('/kategori',categoryRouter);
+app.use('/admin/kategori',verifyAdmin, categoryAdminRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
