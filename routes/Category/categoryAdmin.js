@@ -7,7 +7,7 @@ var KatAdmRouter = express.Router();
 
 KatAdmRouter.use(bodyParser.json());
 
-KatAdmRouter.route('/cateogry')
+KatAdmRouter.route('/')
     .post((req, res, next) => {
         Categories.create(req.body)
         .then((kategori) =>{
@@ -23,10 +23,10 @@ KatAdmRouter.route('/cateogry')
     })
 });
 
-KatAdmRouter.route('/category/:judul')
+KatAdmRouter.route('/:judul')
     .put((req, res, next) => {
         var judul = req.params.judul;
-        Categories.findByIdAndUpdate(
+        Categories.findOneAndUpdate(
             judul, 
             { $set : req.body},
             { new : true}
@@ -43,7 +43,7 @@ KatAdmRouter.route('/category/:judul')
         })
 });
 
-KatAdmRouter.route('/category/:judul')
+KatAdmRouter.route('/:judul')
     .delete((req, res, next) => {
         var judul = req.params.judul;
         Categories.findOneAndRemove(judul)
