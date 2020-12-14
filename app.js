@@ -17,6 +17,8 @@ var adminRouter = require('./routes/admin/admin');
 var verifyUser = require('./middleware/validateUser');
 var verifyAdmin = require('./middleware/validateAdmin');
 
+var {balikinRouter, pinjamRouter} = require('./routes/transactions')
+
 var app = express();
 var url = 'mongodb+srv://puring:puring123@cluster0.i9i6o.mongodb.net/puring?retryWrites=true&w=majority'; //added
 var connect = mongoose.connect(url);
@@ -26,6 +28,24 @@ connect.then((db)=>{ //added
 }, (err)=>{
   console.log("Connection error: ", err);
 });
+
+var url = "mongodb+srv://puring:puring123@cluster0.i9i6o.mongodb.net/puring?authSource=admin&replicaSet=atlas-wqo433-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true"; // added
+var connect = mongoose.connect(url, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+  useFindAndModify: true,
+}); // added
+
+connect.then(
+  (db) => {
+    // added
+    console.log("Koneksi server MongoDB sukses");
+  },
+  (err) => {
+    console.log("Error koneksi: ", err);
+  }
+);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -46,6 +66,10 @@ app.use('/users',verifyAdmin, userRouter);
 app.use('/signup', signupRouter);
 app.use('/login', loginRouter);
 app.use('/profile',verifyUser, profileRouter)
+
+//transactions
+// app.use('/pinjam',pinjamRouter);
+// app.use('/balikin',balikinRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
