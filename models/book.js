@@ -31,7 +31,7 @@ var bookSchema = new Schema({
         type : String,
         required : true
     },
-    listKategori : [Schema.Types.ObjectId]
+    listKategori : [String]
     ,
     stokTersedia : {
         type : Number,

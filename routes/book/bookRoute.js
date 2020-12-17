@@ -10,7 +10,10 @@ const bookRouter = express.Router();
 // route '/buku'
 
 bookRouter.get('/', (req, res, next) => {
-    Books.find({})
+    var page = req.query.page || 0;
+    var numResults = req.query.numResults || 10;
+
+    Books.find({}).limit(numResults).skip(page*10)
     .then((books) => {
         res.status(200);
         res.setHeader('Content-Type', 'application/json');
