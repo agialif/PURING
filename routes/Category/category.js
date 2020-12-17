@@ -24,9 +24,9 @@ KatRouter.route('/')
 
 });
 
-KatRouter.route('/:judul').get((req, res, next) => {
+KatRouter.route('/:nama').get((req, res, next) => {
     var nama = req.params.nama
-    Categories.findOne({judul : nama})
+    Categories.findOne({nama : nama})
     .then((kategori)=>{
         res.statusCode = 200,
         res.setHeader('Content-Type','application/json');
