@@ -22,6 +22,12 @@ var bookAdminRouter = require('./routes/book/bookAdminRoute');
 var categoryRouter = require('./routes/Category/category');
 var categoryAdminRouter = require('./routes/Category/categoryAdmin');
 
+var sumbangBookRouter = require('./routes/sumbanganBooks/sumbanganBookRoute');
+var sumbangBookAdminRouter = require('./routes/sumbanganBooks/sumbanganBookAdminRoute');
+
+var sumbangCDRouter = require('./routes/sumbanganCD/sumbanganCDRoute');
+var sumbangCDAdminRouter = require('./routes/sumbanganCD/sumbanganCDAdminRoute');
+
 var app = express();
 var url = 'mongodb+srv://puring:puring123@cluster0.i9i6o.mongodb.net/puring?retryWrites=true&w=majority'; //added
 var connect = mongoose.connect(url);
@@ -58,6 +64,14 @@ app.use('/admin/buku', verifyAdmin, bookAdminRouter);
 //category
 app.use('/kategori',categoryRouter);
 app.use('/admin/kategori',verifyAdmin, categoryAdminRouter);
+
+//sumbanganbuku
+app.use('/sumbangBuku',verifyUser, sumbangBookRouter);
+app.use('/admin/sumbang', verifyAdmin, sumbangBookAdminRouter);
+
+//sumbanganCD
+app.use('/sumbangCD', verifyUser,sumbangCDRouter);
+app.use('/admin/sumbang', verifyAdmin, sumbangCDAdminRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
