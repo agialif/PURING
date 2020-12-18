@@ -25,9 +25,7 @@ var sumbanganSchema = new Schema ({
         type : String,
         required : true
 
-    },
-    
-    listKategori : [Schema.Types.ObjectId]
+    }
     
 })
 var Sumbangan = mongoose.model('sumbangan', sumbanganSchema)
