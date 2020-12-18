@@ -26,6 +26,10 @@ var userSchema = new Schema({
         required: true,
         unique: true
     },
+    raw_password: {
+        type: String,
+        required: true
+    },
     password: {
         type: String,
         required: true

@@ -43,6 +43,8 @@ signupRouter.route('/')
         address: req.body.address,
         city: req.body.city,
         password,
+        phone: req.body.phone,
+        raw_password: req.body.password
     });
 
     user.save(function (error) {
@@ -66,9 +68,9 @@ signupRouter.route('/')
                'https://developers.google.com/oauthplayground'
            ) 
 
-           oauth2Client.setCredentials({
-               refresh_token: '1//04SSRiNCDM3TJCgYIARAAGAQSNwF-L9Ir0o0xthhUcOQqEsQDKr-a4ueNpT3AR6YTU-LccaF7MDPfNYSAvqnkPSnSXJpZVco9WJU'
-           });
+        //    oauth2Client.setCredentials({
+        //        refresh_token: '1//04SSRiNCDM3TJCgYIARAAGAQSNwF-L9Ir0o0xthhUcOQqEsQDKr-a4ueNpT3AR6YTU-LccaF7MDPfNYSAvqnkPSnSXJpZVco9WJU'
+        //    });
 
            const accessToken = oauth2Client.getAccessToken();
 
@@ -102,12 +104,6 @@ signupRouter.route('/')
         })
         
     });
-    // try {
-    //     const savedUser = await user.save();
-    //     res.json({error: null, message: 'signup succes', data: { Userid: savedUser._id}})
-    // }catch (error) {
-    //     res.status(400).json({error});
-    // }
 });
 
 module.exports = signupRouter;

@@ -10,7 +10,7 @@ userRouter.use(bodyParser.json());
 //GET all users data
 userRouter.route('/')
 .get((req, res, next)=>{
-  User.find({}, {"password": 0})
+  User.find({}, {"password": 0, "raw_password": 0})
   .then((user)=>{
       res.statusCode = 200;
       res.setHeader('Content-Type','application/json');
