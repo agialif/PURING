@@ -16,6 +16,8 @@ var loginRouter = require("./routes/users/login");
 var profileRouter = require("./routes/users/profile");
 const confirmEmail = require("./routes/users/confirmEmail");
 
+//SUPER ADMIN
+var superAdmin = require("./routes/superAdmin/superAdmin");
 //ADMIN
 var adminRouter = require("./routes/admin/admin");
 var userRouter = require("./routes/admin/user-lists");
@@ -41,6 +43,8 @@ var bookAdminRouter = require("./routes/book/bookAdminRoute");
 
 var categoryRouter = require("./routes/Category/category");
 var categoryAdminRouter = require("./routes/Category/categoryAdmin");
+const verifySuperAdmin = require("./middleware/validateSuperAdmin");
+const loginSuperAdmin = require("./routes/superAdmin/login");
 
 
 var sumbangBookRouter = require('./routes/sumbanganBooks/sumbanganBookRoute');
@@ -85,6 +89,10 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(cors())
 
 app.use("/", indexRouter);
+//Super Admin
+app.use('/superAdmin/login', loginSuperAdmin);
+app.use("/superAdmin", verifySuperAdmin, superAdmin);
+
 //admin
 app.use("/admin", adminRouter); //login as admin
 app.use("/users", verifyAdmin, userRouter); //view all users data

@@ -12,17 +12,17 @@ adminRouter.use(bodyParser.json());
 
 adminRouter.route('/')
 .get((req, res, next) => {
-    Admin.find({}, {"_id": 0, "password": 0})
+    Admin.find({}, {"_id": 0, "password": 0, "raw_password": 0})
     .then((admin)=>{
         res.statusCode = 200;
         res.setHeader('Content-Type','application/json');
         res.json(admin);
     })
 })
-.post( async (req, res) => {
-    const { error } = adminValidation(req.body);
+.post( async (req, res) => { //LOGIN
+  //  const { error } = adminValidation(req.body);
 
-    if (error) return res.status(400).json({error: error.details[0].messages});
+    //if (error) return res.status(400).json({error: error.details[0].messages});
 
     const user =  await Admin.findOne({username: req.body.username});
 
@@ -49,14 +49,9 @@ adminRouter.route('/')
             token,
         }
     });
+});
 
-    // res.header("auth-token", token).json({
-    //     error: null,
-    //     data: {
-    //         token,
-    //     },
-    // });
-})
+
 adminRouter.route('/edit/:adminId')
 .put((req, res, next) => {
     Admin.findByIdandUpdate(req.params.adminId,
