@@ -15,7 +15,7 @@ const verifyAdmin = (req, res, next) => {
     }
     catch (err) {
        // return res.status(500).json(err);
-       const verified = jwt.verify(token, process.env.TOKEN_SECRET_ADMIN);
+       const verified = jwt.verify(token, process.env.TOKEN_SECRET_SUPER_ADMIN);
        req.user = verified;
        next();
     }
