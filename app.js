@@ -122,7 +122,7 @@ app.use("/admin/kategori", verifyAdmin, categoryAdminRouter);
 
 //sumbanganbuku
 app.use('/sumbangBuku',verifyUser, sumbangBookRouter);
-app.use('/admin/sumbanBuku', verifyAdmin, sumbangBookAdminRouter);
+app.use('/admin/sumbangBuku', verifyAdmin, sumbangBookAdminRouter);
 
 //sumbanganCD
 app.use('/sumbangCD', verifyUser,sumbangCDRouter);
