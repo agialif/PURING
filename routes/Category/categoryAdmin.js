@@ -46,7 +46,7 @@ KatAdmRouter.route('/:categoriesId')
 KatAdmRouter.route('/:categoriesId')
     .delete((req, res, next) => {
         var categoriesId = req.params.categoriesId;
-        Categories.findByIdAndRemov(categoriesId)
+        Categories.findByIdAndRemove(categoriesId)
         .then((resp) => {
         console.log('Category removed', resp);
         res.statusCode = 200;

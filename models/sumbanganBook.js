@@ -22,12 +22,10 @@ var sumbanganSchema = new Schema ({
 
     },
     jumlahHalaman : {
-        type : Number,
+        type : String,
         required : true
 
-    },
-    
-    listKategori : [Schema.Types.ObjectId]
+    }
     
 })
 var Sumbangan = mongoose.model('sumbangan', sumbanganSchema)

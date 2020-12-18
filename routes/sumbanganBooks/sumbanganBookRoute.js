@@ -40,7 +40,7 @@ sumbangRouter.get('/:judul', (req, res, next) => {
 sumbangRouter.post('/', (req, res, next) => {
     Sumbangan.create(req.body)
     .then((sumbang) => {
-        console.log('Sumbangan Buku created', book);
+        console.log('Sumbangan Buku created', sumbang);
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
         res.json(sumbang)
