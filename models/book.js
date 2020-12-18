@@ -39,6 +39,8 @@ var bookSchema = new Schema({
     }
 });
 
-var Books = mongoose.model('Book', bookSchema)
+bookSchema.index({ judul:"text", penulis:"text", penerbit:"text", sinopsis:"text" })
+
+var Books = mongoose.model('Book', bookSchema);
 
 module.exports = Books;
