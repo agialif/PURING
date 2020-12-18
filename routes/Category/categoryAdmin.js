@@ -23,11 +23,11 @@ KatAdmRouter.route('/')
     })
 });
 
-KatAdmRouter.route('/:nama')
+KatAdmRouter.route('/:categoriesId')
     .put((req, res, next) => {
-        var nama = req.params.nama;
-        Categories.findOneAndUpdate(
-            nama, 
+        var categoriesId = req.params.categoriesId;
+        Categories.findByIdAndUpdate(
+            categoriesId, 
             { $set : req.body},
             { new : true}
         ).then((kategori) =>{
@@ -43,10 +43,10 @@ KatAdmRouter.route('/:nama')
         })
 });
 
-KatAdmRouter.route('/:nama')
+KatAdmRouter.route('/:categoriesId')
     .delete((req, res, next) => {
-        var nama = req.params.nama;
-        Categories.findOneAndDelete({nama:nama})
+        var categoriesId = req.params.categoriesId;
+        Categories.findByIdAndRemov(categoriesId)
         .then((resp) => {
         console.log('Category removed', resp);
         res.statusCode = 200;
