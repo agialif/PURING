@@ -23,11 +23,11 @@ KatAdmRouter.route('/')
     })
 });
 
-KatAdmRouter.route('/:judul')
+KatAdmRouter.route('/:nama')
     .put((req, res, next) => {
-        var judul = req.params.judul;
+        var nama = req.params.nama;
         Categories.findOneAndUpdate(
-            judul, 
+            nama, 
             { $set : req.body},
             { new : true}
         ).then((kategori) =>{
