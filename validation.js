@@ -9,7 +9,7 @@ const registerValidation = (data) => {
       gender: Joi.string().required(),
       birthdate: Joi.date().max('1-1-2004').iso(),
       phone: Joi.string().required(),
-      raw_password: Joi.string.required()
+    //   raw_password: Joi.string().required()
     }).unknown();
     
     return schema.validate(data);

@@ -32,8 +32,6 @@ signupRouter.route('/')
     const salt = await bcrypt.genSalt(10);
     const password = await bcrypt.hash(req.body.password, salt);
 
-   // process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
-
      const user = new User({
         name: req.body.name,
         username: req.body.username,

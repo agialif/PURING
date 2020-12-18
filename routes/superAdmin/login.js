@@ -11,11 +11,12 @@ loginSuperAdmin.use(bodyParser.json());
 loginSuperAdmin.route('/')
 .post((req, res, next) => {
     const user = Super_Admin.findOne(req.body.username);
-    const password = Super_Admin.findOne(req.body.password);
-    
+    const password = Super_Admin.findOne(req.body.password)
+    const validPassword = bcrypt.compare(req.body.password, user.password);
+
     if (!user) {
         return res.status(400).json({error: "Username is wrong"});
-    } else if  (password == user.password){
+    } else if  (!validPassword){
         return res.status(400).json({error: "Password is wrong"});
     } else {
         const token = jwt.sign(

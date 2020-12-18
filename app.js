@@ -60,7 +60,7 @@ var connect = mongoose.connect(url, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
-  useFindAndModify: true,
+  useFindAndModify: false,
 }); // added
 
 connect.then(

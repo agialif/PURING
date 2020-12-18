@@ -69,19 +69,17 @@ superAdmin.route('/:Id')
 .put(async(req, res, next) => {
     const salt = await bcrypt.genSalt(10);
     const password = await bcrypt.hash(req.body.password, salt);
-    Super_Admin.findByIdAndUpdate(req.params.Id,
-        {$set: {
-            username: req.body.username,
-            password
-        }},
-        {new: true})
-        .then((resp) => {
-            res.status(200);
-            res.setHeader('Content-Type','application/json');
-        })
-        .catch((err) => {
-            res.status(500).json({error: err.message})
-        });
+    Super_Admin.findByIdAndUpdate(req.params.Id)
+    const admin = new Super_Admin({
+        username: req.body.username,
+        password
+    });
+
+    admin.save(function (error) {
+        if (error) {
+            return res.status(400);
+        }
+    })
 });
 
 //GET ALL USERS
