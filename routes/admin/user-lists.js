@@ -10,26 +10,12 @@ userRouter.use(bodyParser.json());
 //GET all users data
 userRouter.route('/')
 .get((req, res, next)=>{
-  User.find({})
+  User.find({}, {"password": 0})
   .then((user)=>{
       res.statusCode = 200;
       res.setHeader('Content-Type','application/json');
       res.json(user);
   });
 });
-
-// userRouter.route('/edit')
-// .put( async (req, res) => {
-//   const username = req.cookies.userCookie;
-  
-//   User.findOneAndUpdate(username, 
-//     {$set: req.body},
-//     {new: true})
-//   .then((user) => {
-//     res.status(200);
-//     res.json(user);
-//   });
-
-// });
 
   module.exports = userRouter;

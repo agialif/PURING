@@ -14,6 +14,7 @@ var indexRouter = require("./routes/index");
 var signupRouter = require("./routes/users/signup");
 var loginRouter = require("./routes/users/login");
 var profileRouter = require("./routes/users/profile");
+const confirmEmail = require("./routes/users/confirmEmail");
 
 //ADMIN
 var adminRouter = require("./routes/admin/admin");
@@ -40,6 +41,7 @@ var bookAdminRouter = require("./routes/book/bookAdminRoute");
 
 var categoryRouter = require("./routes/Category/category");
 var categoryAdminRouter = require("./routes/Category/categoryAdmin");
+
 
 var app = express();
 
@@ -81,6 +83,7 @@ app.use("/users", verifyAdmin, userRouter); //view all users data
 app.use("/signup", signupRouter); //user signup
 app.use("/login", loginRouter); //login as user
 app.use("/profile", verifyUser, profileRouter); //user profile
+app.use("/confirmation", confirmEmail);
 
 //logout both admin and users
 app.use("/logout", logoutRouter);

@@ -3,9 +3,11 @@ const bodyParser = require("body-parser");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
+
 const User = require("../../models/user");
 
 const { registerValidation, loginValidation } = require("../../validation");
+const { required } = require("@hapi/joi");
 
 var loginRouter = express.Router();
 
@@ -24,6 +26,10 @@ loginRouter.route("/").post(async (req, res) => {
   const validPassword = await bcrypt.compare(req.body.password, user.password);
   if (!validPassword)
     return res.status(400).json({ error: "Password is wrong" });
+
+  if (!user.isVerified) {
+    return res.status(401).json({error: "Your email has not been verified"});
+  }
 
   const token = jwt.sign(
     {

@@ -42,7 +42,15 @@ var userSchema = new Schema({
         type: String,
         required: true
     },
-    address: addressSchema
+    phone: {
+        type: String,
+        required: false
+    },
+    address: addressSchema,
+    isVerified: {
+        type: Boolean,
+        default: false
+    }
 }, {
     timestamps: true
 });

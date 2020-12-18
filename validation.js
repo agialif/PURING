@@ -8,6 +8,7 @@ const registerValidation = (data) => {
       password: Joi.string().min(6).max(1024).required(),
       gender: Joi.string().required(),
       birthdate: Joi.date().max('1-1-2004').iso(),
+      phone: Joi.string().required()
     }).unknown();
     
     return schema.validate(data);
