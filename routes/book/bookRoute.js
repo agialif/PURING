@@ -43,6 +43,39 @@ bookRouter.get('/judul/:judul', (req, res, next) => {
     })
 })
 
+bookRouter.get('/id/:id', (req, res, next) => {
+    var id = req.params.id;
+    Books.findById(id)
+    .then((book) => {
+        res.status(200);
+        res.setHeader('Content-Type', 'application/json');
+        res.json(book)
+    })
+    .catch((err) => {
+        console.log(err)
+        res.status(500);
+        res.end('Error : ', err);
+    })
+})
+
+bookRouter.get('/kategori/:kategori', (req, res, next) => {
+    var kategori = req.params.kategori;
+    var page = parseInt(req.query.page) || 0;
+    var numResults = parseInt(req.query.numResults) || 10;
+
+    Books.find({listKategori : kategori})
+    .limit(numResults).skip(page*10)
+    .then((book) => {
+        res.status(200);
+        res.setHeader('Content-Type', 'application/json');
+        res.json(book)
+    })
+    .catch((err) => {
+        console.log(err)
+        res.status(500);
+        res.end('Error : ', err);
+    })
+})
 
 bookRouter.get('/search', (req, res, next) => {
     var s = req.query.s;
@@ -90,18 +123,5 @@ bookRouter.get('/search', (req, res, next) => {
     }
 
 })
-
-// bookRouter.post('/setIndex', (req, res, next) => {
-//     Books.index( { judul:"text", penulis:"text", penerbit:"text", sinopsis:"text" } )
-//     .then((result) => {
-//         res.status(200);
-//         res.end("Result :",result);
-//     })
-//     .catch((err) => {
-//         console.log(err);
-//         res.status(500);
-//         res.end('Error :', err);
-//     })
-// })
 
 module.exports = bookRouter;

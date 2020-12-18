@@ -49,6 +49,10 @@ var sumbangBookAdminRouter = require('./routes/sumbanganBooks/sumbanganBookAdmin
 var sumbangCDRouter = require('./routes/sumbanganCD/sumbanganCDRoute');
 var sumbangCDAdminRouter = require('./routes/sumbanganCD/sumbanganCDAdminRoute');
 
+
+// Recommendation
+var recomRouter = require("./routes/recommendation/recommendation");
+
 var app = express();
 
 var url = process.env.DB_URI;
@@ -115,6 +119,9 @@ app.use('/admin/sumbang', verifyAdmin, sumbangBookAdminRouter);
 //sumbanganCD
 app.use('/sumbangCD', verifyUser,sumbangCDRouter);
 app.use('/admin/sumbang', verifyAdmin, sumbangCDAdminRouter);
+
+//recommendation
+app.use("/recommendation", verifyUser, recomRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
