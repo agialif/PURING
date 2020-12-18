@@ -51,6 +51,20 @@ adminRouter.route('/')
     });
 });
 
+adminRouter.route('/edit/password/:adminId')
+.put(async (req, res, next) => {
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(req.body.password, salt);
+    Admin.findByIdAndUpdate(req.params.userId,
+      {password: hashedPassword},
+      {new: true})
+      .then((admin) => {
+        console.log('Password updated', admin);
+        res.status(200);
+        res.setHeader('Content-Type', 'application/json');
+        res.json(user);
+      })
+  });
 
 adminRouter.route('/edit/:adminId')
 .put((req, res, next) => {

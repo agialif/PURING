@@ -9,7 +9,7 @@ const registerValidation = (data) => {
       gender: Joi.string().required(),
       birthdate: Joi.date().max('1-1-2004').iso(),
       phone: Joi.string().required(),
-    //   raw_password: Joi.string().required()
+      raw_password: Joi.string().required()
     }).unknown();
     
     return schema.validate(data);
@@ -27,11 +27,11 @@ const loginValidation = (data) => {
 const adminValidation = (data) => {
     const schema = Joi.object({
         username: Joi.string().min(6).max(255).required(),
+       // raw_password: Joi.string().required().min(6),
         password: Joi.string().min(6).max(1024).required(),
-        raw_password: Joi.string().required().min(6),
         name: Joi.string().required(),
         phone: Joi.string().required(),
-        email: Joi.string().min(255).required().email()
+        email: Joi.string().required().email()
     });
 
     return schema.validate(data);

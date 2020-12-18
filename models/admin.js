@@ -11,8 +11,8 @@ var adminSchema = new Schema({
         required: true
     },
     raw_password: {
-        type: String,
-        required: true
+        type: String
+        
     },
     password: {
         type: String,

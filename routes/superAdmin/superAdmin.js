@@ -5,7 +5,7 @@ const { required } = require('@hapi/joi');
 const Admin = require('../../models/admin');
 const Super_Admin = require('../../models/superAdmin');
 const Books = require('../../models/book');
-const adminValidation = require('../../validation');
+const { adminValidation } = require('../../validation');
 const bcrypt = require('bcrypt');
 
 var superAdmin = express.Router();
@@ -33,8 +33,9 @@ superAdmin.route('/admin')
 
     if(isEmailExist) return res.status(400).json({error: "Email already Exists"});
 
+    const adminPassword = req.body.password;
     const salt = await bcrypt.genSalt(10);
-    const password = await bcrypt.hash(req.body.password, salt);
+    const password = await bcrypt.hash(adminPassword, salt);
 
      const admin = new Admin({
         name: req.body.name,
@@ -42,7 +43,7 @@ superAdmin.route('/admin')
         email: req.body.email,
         phone: req.body.phone,
         password,
-        raw_password: req.body.password
+        adminPassword
     });
 
     try {
@@ -66,20 +67,31 @@ superAdmin.route('/admin')
 
 //UPDATE SUPER ADMIN PROFILE
 superAdmin.route('/:Id')
+.put(async (req, res, next) => {
+    Super_Admin.findByIdAndUpdate(req.params.userId,
+      {$set: req.body},
+              {new: true})
+      .then((resp) => {
+        console.log('Profile updated', resp);
+        res.status(200);
+        res.setHeader('Content-Type', 'application/json');
+        res.json(user);
+      })
+  });
+//Update SUPER AMDIN PASSWORD ONLY
+superAdmin.route('/password/:Id')
 .put(async(req, res, next) => {
     const salt = await bcrypt.genSalt(10);
-    const password = await bcrypt.hash(req.body.password, salt);
-    Super_Admin.findByIdAndUpdate(req.params.Id)
-    const admin = new Super_Admin({
-        username: req.body.username,
-        password
-    });
-
-    admin.save(function (error) {
-        if (error) {
-            return res.status(400);
-        }
-    })
+    const hashedPassword = await bcrypt.hash(req.body.password, salt);
+    Super_Admin.findByIdAndUpdate(req.params.userId,
+      {password: hashedPassword},
+      {new: true})
+      .then((resp) => {
+        console.log('Password updated', resp);
+        res.status(200);
+        res.setHeader('Content-Type', 'application/json');
+        res.json(user);
+      })
 });
 
 //GET ALL USERS
@@ -102,10 +114,26 @@ superAdmin.route('/users')
     res.status(404).json('DELETE method not supported');
 });
 
+superAdmin.route('/admin/password/:adminId')
+.put(async (req, res, next) => {
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(req.body.password, salt);
+    Admin.findByIdAndUpdate(req.params.userId,
+      {password: hashedPassword},
+      {new: true})
+      .then((admin) => {
+        console.log('Password updated', admin);
+        res.status(200);
+        res.setHeader('Content-Type', 'application/json');
+        res.json(user);
+      })
+  });
+
 superAdmin.route('/admin/:adminId')
 .get((req, res, next) => {
     Admin.findById(req.params.adminId)
     .then((admin) => {
+        console.log('Profile updated', admin);
         res.status(200);
         res.setHeader('Content-Type','application/json');
         res.json(admin);

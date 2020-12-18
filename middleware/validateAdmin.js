@@ -14,10 +14,14 @@ const verifyAdmin = (req, res, next) => {
         next();
     }
     catch (err) {
-       // return res.status(500).json(err);
-       const verified = jwt.verify(token, process.env.TOKEN_SECRET_SUPER_ADMIN);
-       req.user = verified;
-       next();
+        try {
+            const verified = jwt.verify(token, process.env.TOKEN_SECRET_SUPER_ADMIN);
+            req.user = verified;
+            next();
+        }
+        catch(err){
+            return res.status(500).json(err);
+        }
     }
 };
 

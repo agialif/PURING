@@ -2,16 +2,32 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const User = require('../../models/user');
+const bcrypt = require('bcrypt');
 
 var profileRouter = express.Router();
 
 profileRouter.use(bodyParser.json());
 
+profileRouter.route('/password/:userId')//change password
+.put(async (req, res, next) => {
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(req.body.password, salt);
+  User.findByIdAndUpdate(req.params.userId,
+    {password: hashedPassword},
+    {new: true})
+    .then((user) => {
+      console.log('Password updated', user);
+      res.status(200);
+      res.setHeader('Content-Type', 'application/json');
+      res.json(user);
+    })
+});
+
 profileRouter.route('/:userId')
-.put((req, res, next) => {
+.put(async (req, res, next) => {
   User.findByIdAndUpdate(req.params.userId,
     {$set: req.body},
-    {new: true})
+            {new: true})
     .then((user) => {
       console.log('Profile updated', user);
       res.status(200);

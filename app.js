@@ -100,7 +100,7 @@ app.use("/users", verifyAdmin, userRouter); //view all users data
 //user
 app.use("/signup", signupRouter); //user signup
 app.use("/login", loginRouter); //login as user
-app.use("/profile", verifyUser, profileRouter); //user profile
+app.use("/profile",verifyUser, profileRouter); //user profile
 app.use("/confirmation", confirmEmail);
 
 //logout both admin and users

@@ -5,9 +5,9 @@ const verifyUser = (req, res, next) => {
 
     const token = req.cookies.authCookie;
 
-    User.findOne(req.body.username)
+    User.findOne({username: req.body.username})
     .then((user) => {
-        if (user.isVerified = true) {
+        if (user.isVerified == true) {
             try {
                 if(!token) {
                     return res.status(401).json('You need to login')
