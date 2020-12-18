@@ -43,6 +43,12 @@ var categoryRouter = require("./routes/Category/category");
 var categoryAdminRouter = require("./routes/Category/categoryAdmin");
 
 
+var sumbangBookRouter = require('./routes/sumbanganBooks/sumbanganBookRoute');
+var sumbangBookAdminRouter = require('./routes/sumbanganBooks/sumbanganBookAdminRoute');
+
+var sumbangCDRouter = require('./routes/sumbanganCD/sumbanganCDRoute');
+var sumbangCDAdminRouter = require('./routes/sumbanganCD/sumbanganCDAdminRoute');
+
 var app = express();
 
 var url = process.env.DB_URI;
@@ -101,6 +107,14 @@ app.use("/admin/buku", verifyAdmin, bookAdminRouter);
 //category
 app.use("/kategori", categoryRouter);
 app.use("/admin/kategori", verifyAdmin, categoryAdminRouter);
+
+//sumbanganbuku
+app.use('/sumbangBuku',verifyUser, sumbangBookRouter);
+app.use('/admin/sumbang', verifyAdmin, sumbangBookAdminRouter);
+
+//sumbanganCD
+app.use('/sumbangCD', verifyUser,sumbangCDRouter);
+app.use('/admin/sumbang', verifyAdmin, sumbangCDAdminRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
