@@ -202,7 +202,7 @@ superAdmin.route('/user/:userId')
         });
 })
 .delete((req, res, next) => {
-    User.findByIdAndDelete(req.params.adminId)
+    User.findByIdAndDelete(req.params.userId)
     .then((user) => {
         res.status(200);
         res.setHeader('Content-Type','application/json');
