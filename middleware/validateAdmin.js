@@ -20,7 +20,7 @@ const verifyAdmin = (req, res, next) => {
             next();
         }
         catch(err){
-            return res.status(500).json(err);
+            return res.status(500).json('Access Denied');
         }
     }
 };

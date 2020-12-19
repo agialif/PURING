@@ -54,21 +54,16 @@ signupRouter.route('/')
             _userId: user._id,
             token: crypto.randomBytes(10).toString('hex')
         });
-       
+
         token.save(function (error){
             if (error) {
                 return res.status(500).json({error: error.message});
             }
-           // return res.json('Please verify your account by clicking the link: \nhttp:\/\/' + req.headers.host + '\/confirmation/account\/' + user.email + '\/' +token.token );
            const oauth2Client = new OAuth2(
                '707025075356-urv00v2mpg9vevfvpl3j2373bk4c8j0q.apps.googleusercontent.com',
                '3Z3ZjLAdUNY1n1dd5KfBEEq6',
                'https://developers.google.com/oauthplayground'
            ) 
-
-        //    oauth2Client.setCredentials({
-        //        refresh_token: '1//04SSRiNCDM3TJCgYIARAAGAQSNwF-L9Ir0o0xthhUcOQqEsQDKr-a4ueNpT3AR6YTU-LccaF7MDPfNYSAvqnkPSnSXJpZVco9WJU'
-        //    });
 
            const accessToken = oauth2Client.getAccessToken();
 

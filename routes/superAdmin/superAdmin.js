@@ -49,7 +49,7 @@ superAdmin.route('/admin')
     try {
         const savedAdmin = await admin.save();
         res.json({
-            error: null,
+            status: 'Successfully added admin',
             data: {
                 adminId: savedAdmin._id
             }
@@ -127,6 +127,9 @@ superAdmin.route('/admin/password/:adminId')
         res.setHeader('Content-Type', 'application/json');
         res.json(user);
       })
+      .catch((err) => {
+        res.status(500).json({error: err.message})
+    });
   });
 
 superAdmin.route('/admin/:adminId')

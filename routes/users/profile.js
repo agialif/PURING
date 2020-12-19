@@ -21,6 +21,9 @@ profileRouter.route('/password/:userId')//change password
       res.setHeader('Content-Type', 'application/json');
       res.json(user);
     })
+    .catch((err) => {
+      res.status(500).json({error: err.message})
+  });
 });
 
 profileRouter.route('/:userId')
@@ -34,6 +37,9 @@ profileRouter.route('/:userId')
       res.setHeader('Content-Type', 'application/json');
       res.json(user);
     })
+    .catch((err) => {
+      res.status(500).json({error: err.message})
+  });
 })
 .get((req, res, next) => {
   User.findById(req.params.userId, {"password": 0})
@@ -42,6 +48,9 @@ profileRouter.route('/:userId')
     res.setHeader('Content-Type','application/json');
     res.json(user);
   })
+  .catch((err) => {
+    res.status(500).json({error: err.message})
+  });
 })
 .post((req, res, next) => {
   res.status(403);

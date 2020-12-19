@@ -27,7 +27,8 @@ const verifyUser = (req, res, next) => {
       req.user = verified;
       next();
     } catch (err) {
-      return res.status(500).json(err);
+      return res.status(500).json('Access Denied');
+
     }
   }
 };
