@@ -33,7 +33,7 @@ loginSuperAdmin.route('/')
     
         res.cookie('authCookie', token,{maxAge:900000, htpOnly:true}).json({
             error: null,
-            id: user.id,
+            id: user._id,
             data: {
                 token,
             }

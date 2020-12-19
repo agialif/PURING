@@ -51,14 +51,6 @@ loginRouter.route("/").post(async (req, res) => {
     },
   });
 
-  // res.header("auth-token", token).json({
-  //     error: null,
-  //     data: {
-  //         token,
-  //     },
-  // });
 });
-
-//register rout
 
 module.exports = loginRouter;
